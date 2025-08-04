@@ -1,9 +1,9 @@
-
 CREATE OR REPLACE FUNCTION update_user(
   p_id INT,
   p_first_name TEXT DEFAULT NULL,
   p_last_name TEXT DEFAULT NULL,
-  p_email TEXT DEFAULT NULL
+  p_email TEXT DEFAULT NULL,
+  p_profile_image TEXT DEFAULT NULL
 )
 RETURNS users
 LANGUAGE plpgsql
@@ -22,6 +22,7 @@ BEGIN
     first_name = COALESCE(p_first_name, first_name),
     last_name = COALESCE(p_last_name, last_name),
     email = COALESCE(p_email, email),
+    profile_image = COALESCE(p_profile_image, profile_image),
     updated_at = CURRENT_DATE
   WHERE id = p_id
   RETURNING * INTO updated_user;
